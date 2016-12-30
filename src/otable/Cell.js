@@ -42,29 +42,27 @@ class Cell extends Component {
       contentStyles.paddingRight = 28;
     }
 
-    const expandIcon = hasChildren && firstColumn ? (
-      <i
-        className="expand-icon fa fa-min"
-        onClick={(event) => onTreeToggle(rowKey, rowIndex, event)}
-      >
-      </i>) : null;
-
-    const resultContent = (
-      <div
-        className={prefix(classPrefix)('cell-content')}
-        style={contentStyles}
-      >
-          {expandIcon}
-          {content}
-      </div>
-    );
-
     return (
       <div className={classes} style={styles}>
         <div className={prefix(classPrefix)('cell-wrap1')}>
           <div className={prefix(classPrefix)('cell-wrap2')}>
             <div className={prefix(classPrefix)('cell-wrap3')}>
-              {resultContent}
+              {
+                <div
+                  className={prefix(classPrefix)('cell-content')}
+                  style={contentStyles}
+                >
+                    {
+                       hasChildren && firstColumn ? (
+                         <i
+                           className="expand-icon fa fa-min"
+                           onClick={(e) => onTreeToggle(rowKey, rowIndex, e)}
+                         >
+                         </i>) : null
+                    }
+                    {content}
+                </div>
+              }
             </div>
           </div>
         </div>

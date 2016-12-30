@@ -13,7 +13,8 @@
     "classnames": "^2.2.5",
     "dt2react": "^1.0.0",
     "react": "^15.3.2",
-    "react-dom": "^15.3.2"
+    "react-dom": "^15.3.2",
+    "amos-ui": "^1.0.1"
   },
   "devDependencies": {
     "babel-cli": "^6.10.1",
@@ -28,13 +29,14 @@
     "babel-preset-stage-0": "^6.1.18",
     "babel-register": "^6.9.0",
     "babel-runtime": "^6.2.0",
-    "webpack": "^1.13.1",
-    "webpack-dev-server": "^1.14.0",
     "css-loader": "^0.23.0",
-    "style-loader": "^0.13.0",
+    "file-loader": "^0.8.5",
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
+    "ray-plugins": "^1.0.0",
+    "style-loader": "^0.13.0",
     "url-loader": "^0.5.7",
-    "file-loader": "^0.8.5"
+    "webpack": "^1.13.1",
+    "webpack-dev-server": "^1.14.0"
   }
 }

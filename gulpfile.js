@@ -41,7 +41,7 @@ gulp.task('compileCSS', function(){
 
 //复制静态资源到指定目录
 gulp.task('compileImg', function(){
-  return gulp.src(['src/**/*.png', 'src/**/*.jpg', 'src/**/*.gif', 'src/**/*.cur'])
+  return gulp.src(['src/**/*.png', 'src/**/*.jpg', 'src/**/*.gif', 'src/**/*.cur', 'src/style/font/**'])
     .pipe(gulp.dest('lib/'));
 });
 // 发布之前操作

@@ -54,6 +54,7 @@
     "gulp-rename": "^1.2.2",
     "gulp-uglify": "^2.0.0",
     "rimraf": "^2.5.1",
-    "webpack": "^1.13.1"
+    "webpack": "^1.13.1",
+    "ray-plugins": "^1.0.0"
   }
 }

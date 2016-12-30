@@ -5,6 +5,7 @@
 
 const path = require('path');
 const webpack = require('webpack');
+const {RayShow, OpenUrlPlugins, browser} = require('ray-plugins');
 
 const __path = 'dist';
 // ------------------------------------
@@ -24,7 +25,9 @@ const webpackConfig = {
     extensions: ['', '.js', '.jsx', '.json']
   },
   module: {},
-  plugins:[]
+  plugins:[
+    new RayShow()
+  ]
 };
 
 // ------------------------------------
@@ -79,7 +82,8 @@ if(__DEV__){
   console.log('>启动实时预览插件(development) (HMR, NoErrors).');
   webpackConfig.plugins.push(
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
+    new webpack.NoErrorsPlugin(),
+    new OpenUrlPlugins({url: 'http://localhost:9000',browser: browser.chrome})
   );
 }
 

@@ -2,10 +2,9 @@ import React, {Component, PropTypes} from 'react';
 import { findDOMNode } from 'react-dom';
 import classNames from 'classnames';
 import { on, scrollLeft, scrollTop, addStyle, addClass, removeClass, toggleClass } from 'dt2react';
-import Row from './Row';
-import CellGroup from './CellGroup';
 import prefix from './_prefix';
 import RenderData from './RenderData';
+import RenderRow from './RenderRow';
 const execRowKey = '_' + (Math.random() * 1E18).toString(36).slice(0, 5).toUpperCase();
 
 const isIE8 = ()=> !!navigator.userAgent.match(/MSIE 8.0/);
@@ -105,14 +104,14 @@ class Table extends Component {
   }
 
   _onTreeToggle = (rowKey, index) => {
-    console.log('_onTreeToggle=>',rowKey + '|' + index);
+    console.log('treeToggle:' + rowKey);
     toggleClass(findDOMNode(this.refs[`children_${rowKey}_${index}`]), 'open');
   }
 
   randerRowData = (bodyCells, rowData, props) => {
     const { onRowClick, classPrefix } = this.props;
     const hasChildren = this.props.isTree && rowData.children && Array.isArray(rowData.children) && rowData.children.length > 0;
-    const row = this.renderRow({
+    const renderRowProps = {
       key: props.index,
       rowIndex: props.index,
       width: props.rowWidth,
@@ -122,19 +121,26 @@ class Table extends Component {
         onRowClick && onRowClick(rowData);
       },
       rowData
-    },
-     bodyCells.map((cell, key) => React.cloneElement(cell, {
-       key: key,
-       layer: props.layer,
-       hasChildren: hasChildren,
-       rowIndex: props.index,
-       onTreeToggle: this._onTreeToggle,
-       execRowKey,
-       rowData
-     },
-     cell.props.children)));
+    };
 
-
+    const rrKey = `rr_${props.index}`;
+    const row = (
+      <RenderRow
+        key={rrKey}
+        renderRowProps={renderRowProps}
+        cells={
+          bodyCells.map((cell, key) => React.cloneElement(cell, {
+            key: key,
+            layer: props.layer,
+            hasChildren: hasChildren,
+            rowIndex: props.index,
+            onTreeToggle: this._onTreeToggle,
+            rowKey: execRowKey,
+            rowData
+          }, cell.props.children))
+        }
+      />
+    );
     //insert children
     if (hasChildren) {
       props.layer++;
@@ -215,70 +221,6 @@ class Table extends Component {
     });
   }
 
-  renderRow = (props, cells) => {
-
-    //IF there are fixed columns, add a fixed group
-    if (this.isFixedColumn) {
-
-      let fixedCells = cells.filter(function(cell) {
-        return cell.props.fixed;
-      });
-
-      let otherCells = cells.filter(function(cell) {
-        return !cell.props.fixed;
-      });
-
-      let fixedCellGroupWidth = 0;
-
-      fixedCells.map((item) => {
-        fixedCellGroupWidth += item.props.width;
-      });
-
-      return (
-        <Row {...props}>
-          <CellGroup
-            fixed
-            height={props.isHeaderRow ? props.headerHeight : props.height}
-            width={fixedCellGroupWidth}
-          >
-            {fixedCells}
-          </CellGroup>
-          <CellGroup>{otherCells}</CellGroup>
-        </Row>
-      );
-
-    }
-
-    return (
-      <Row {...props}>
-        {cells}
-      </Row>
-    );
-
-  }
-
-  renderTableHeader = (headerCells, rowWidth) => {
-    const {rowHeight, headerHeight, classPrefix} = this.props;
-    const row = this.renderRow({
-      ref: 'tableHeader',
-      width: rowWidth,
-      height: rowHeight,
-      headerHeight: headerHeight,
-      isHeaderRow: true,
-      top: 0
-
-    },
-     headerCells);
-
-    return (
-      <div
-        className={prefix(classPrefix)('header-row-wrapper')}
-      >
-        {row}
-      </div>
-    );
-  }
-
   render() {
     const {
       // children,
@@ -310,6 +252,15 @@ class Table extends Component {
     );
 
     const tableStyles = Object.assign({ width: width || 'auto', height }, style);
+    // table header
+    const renderRowProps = {
+      // ref: 'tableHeader',
+      width: rowWidth,
+      height: rowHeight,
+      headerHeight: headerHeight,
+      isHeaderRow: true,
+      top: 0
+    };
 
     // mouse Areas
     const scrollLeft = this.scrollLeft || 0;
@@ -343,7 +294,11 @@ class Table extends Component {
 
     return (
       <div className={clesses} style={tableStyles} ref='table' id={id}>
-        {this.renderTableHeader(headerCells, rowWidth)}
+        <div
+          className={prefix(classPrefix)('header-row-wrapper')}
+        >
+          <RenderRow renderRowProps={renderRowProps} cells={headerCells} />
+        </div>
         <div
           ref="tableBody"
           className={prefix(classPrefix)('body-row-wrapper')}
