@@ -1,0 +1,10 @@
+dev/
+min/
+src/
+dist/
+examples/
+node_modules/
+*.config.*
+tests/
+*.build.*
+gulpfile.js
