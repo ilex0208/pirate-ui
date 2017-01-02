@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import RayTable from './../../src/rctable';
-import './../../src/rctable/style/index.css';
+import RayTable from './../../src/rtable';
+import './../../src/rtable/style/index.css';
 
 const permissionRender = (text) => <span><input type="checkbox" className="common-checkbox" />r/w</span>;
 
