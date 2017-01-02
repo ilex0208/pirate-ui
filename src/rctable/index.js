@@ -1,8 +1,8 @@
-const Table = require('./Table');
+const RayTable = require('./Table');
 const Column = require('./Column');
 const ColumnGroup = require('./ColumnGroup');
 
-Table.Column = Column;
-Table.ColumnGroup = ColumnGroup;
+RayTable.Column = Column;
+RayTable.ColumnGroup = ColumnGroup;
 
-module.exports = Table;
+module.exports = RayTable;

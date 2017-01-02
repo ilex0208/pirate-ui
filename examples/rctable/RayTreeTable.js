@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
-import Table from './../../src/rctable';
+import RayTable from './../../src/rctable';
 import './../../src/rctable/style/index.css';
 
-const permissionRender = (text) => <span><input type="checkbox" />r/w</span>;
+const permissionRender = (text) => <span><input type="checkbox" className="common-checkbox" />r/w</span>;
 
-const firstColRender = (text) => <span><input type="checkbox" />{text}</span>;
+const firstColRender = (text) => <span><input type="checkbox" className="common-checkbox" />{text}</span>;
 
 const columns = [
   {title: '模块名称', dataIndex: 'modulename', key: 'modulename', width: 200,
@@ -89,7 +89,7 @@ class RCTreeTable extends Component {
 
   render() {
     return (
-      <Table
+      <RayTable
         columns={columns}
         data={datas}
         onRowClick={onRowClick}

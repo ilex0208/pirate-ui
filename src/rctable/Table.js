@@ -9,7 +9,7 @@ import addEventListener from './../common/addEventListener';
 import ColumnManager from './ColumnManager';
 import createStore from './createStore';
 
-class Table extends Component {
+class RayTable extends Component {
   static propTypes = {
     data: PropTypes.array,
     expandIconAsCell: PropTypes.bool,
@@ -701,4 +701,4 @@ class Table extends Component {
   }
 }
 
-export default Table;
+export default RayTable;
