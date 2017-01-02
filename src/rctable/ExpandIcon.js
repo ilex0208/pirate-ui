@@ -1,18 +1,25 @@
-import React, { PropTypes } from 'react';
+// @author ilex.h
+// modified with rctable
+import React, { Component, PropTypes } from 'react';
 import {simpleEqual} from './../common/simpleCompare';
 
-const ExpandIcon = React.createClass({
-  propTypes: {
+/**
+ * 展开
+ */
+class ExpandIcon extends Component {
+  static propTypes = {
     record: PropTypes.object,
     prefixCls: PropTypes.string,
     expandable: PropTypes.any,
     expanded: PropTypes.bool,
     needIndentSpaced: PropTypes.bool,
     onExpand: PropTypes.func
-  },
+  }
+
   shouldComponentUpdate(nextProps) {
     return !simpleEqual(nextProps, this.props);
-  },
+  }
+
   render() {
     const { expandable, prefixCls, onExpand, needIndentSpaced, expanded, record } = this.props;
     if (expandable) {
@@ -28,6 +35,6 @@ const ExpandIcon = React.createClass({
     }
     return null;
   }
-});
+}
 
 export default ExpandIcon;

@@ -1,15 +1,22 @@
-import React, { PropTypes } from 'react';
+// @author ilex.h
+// modified with rctable
+import React, { Component, PropTypes } from 'react';
 import {simpleEqual} from './../common/simpleCompare';
 
-export default React.createClass({
-  propTypes: {
+/**
+ * table header
+ */
+class TableHeader extends Component {
+  static propTypes = {
     prefixCls: PropTypes.string,
     rowStyle: PropTypes.object,
     rows: PropTypes.array
-  },
+  }
+
   shouldComponentUpdate(nextProps) {
     return !simpleEqual(nextProps, this.props);
-  },
+  }
+
   render() {
     const { prefixCls, rowStyle, rows } = this.props;
     return (
@@ -24,4 +31,6 @@ export default React.createClass({
       </thead>
     );
   }
-});
+}
+
+export default TableHeader;

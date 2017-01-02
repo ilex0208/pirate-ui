@@ -1,8 +1,14 @@
-import React, { PropTypes } from 'react';
+// @author ilex.h
+// modified with rctable
+import React, { Component, PropTypes } from 'react';
 import objectPath from 'object-path';
 
-const TableCell = React.createClass({
-  propTypes: {
+/**
+ * table cell
+ * @author ilex.h
+ */
+class TableCell extends Component {
+  static propTypes = {
     record: PropTypes.object,
     prefixCls: PropTypes.string,
     index: PropTypes.number,
@@ -10,17 +16,20 @@ const TableCell = React.createClass({
     indentSize: PropTypes.number,
     column: PropTypes.object,
     expandIcon: PropTypes.node
-  },
+  }
+
   isInvalidRenderCellText(text) {
     return text && !React.isValidElement(text) &&
       Object.prototype.toString.call(text) === '[object Object]';
-  },
+  }
+
   handleClick(e) {
     const { record, column: { onCellClick } } = this.props;
     if (onCellClick) {
       onCellClick(record, e);
     }
-  },
+  }
+
   render() {
     const { record, indentSize, prefixCls, indent,
             index, expandIcon, column } = this.props;
@@ -69,6 +78,6 @@ const TableCell = React.createClass({
       </td>
     );
   }
-});
+}
 
 export default TableCell;
