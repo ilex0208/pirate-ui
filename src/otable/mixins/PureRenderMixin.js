@@ -1,4 +1,4 @@
-import simpleCompare from './../utils/simpleCompare';
+import simpleCompare from './../../common/simpleCompare';
 
 /**
  * Mixin比较器,用于浅层次判断是否需要重新渲染组件

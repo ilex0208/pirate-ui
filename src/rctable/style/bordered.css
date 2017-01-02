@@ -1,0 +1,7 @@
+.ray-table.bordered table {
+  border-collapse: collapse;
+}
+.ray-table.bordered th,
+.ray-table.bordered td {
+  border: 1px solid #e9e9e9;
+}

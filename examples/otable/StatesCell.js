@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react';
-import {Cell} from '../src/otable';
+import {Cell} from './../../src/otable';
 
 class StatesCell extends Component {
   render() {

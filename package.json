@@ -6,7 +6,7 @@
   "directories": {
     "example": "examples"
   },
-   "scripts": {
+  "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -26,9 +26,11 @@
   "dependencies": {
     "classnames": "^2.2.5",
     "dt2react": "^1.0.0",
+    "object-path": "^0.11.3",
     "ray-pagination": "^1.0.1",
     "react": "^15.3.2",
-    "react-dom": "^15.3.2"
+    "react-dom": "^15.3.2",
+    "warning": "^3.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.10.1",

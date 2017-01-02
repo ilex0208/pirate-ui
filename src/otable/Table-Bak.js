@@ -1,4 +1,4 @@
-import React, {PropTypes} from 'react';
+import React, {Component, PropTypes} from 'react';
 import { findDOMNode } from 'react-dom';
 import classNames from 'classnames';
 import { on, scrollLeft, scrollTop, addStyle, addClass, removeClass, toggleClass } from 'dt2react';
@@ -10,48 +10,10 @@ const execRowKey = '_' + (Math.random() * 1E18).toString(36).slice(0, 5).toUpper
 const isIE8 = ()=> !!navigator.userAgent.match(/MSIE 8.0/);
 const ReactChildren = React.Children;
 
-const Table = React.createClass({
-  propTypes: {
-    width: PropTypes.number,
-    data: PropTypes.array.isRequired,
-    height: PropTypes.number,
-    rowHeight: PropTypes.number,
-    headerHeight: PropTypes.number,
-    scrollLeft: PropTypes.number,
-    scrollTop: PropTypes.number,
-    onRowClick: PropTypes.func,
-    isTree: PropTypes.bool,
-    expand: PropTypes.bool,
-    locale: PropTypes.object,
-    sortColumn: PropTypes.string,
-    sortType: PropTypes.oneOf(['desc', 'asc']),
-    /**
-     * @callback
-     * @params: sortColumn dataKey
-     * @params: sortType
-     */
-    onSortColumn: PropTypes.func,
-    classPrefix: PropTypes.string,
-    children: PropTypes.any,
-    className: PropTypes.any,
-    style: PropTypes.any,
-    id: PropTypes.any
-  },
-
-  getDefaultProps() {
-    return {
-      classPrefix: 'ray-table',
-      height: 200,
-      rowHeight: 36,
-      sortType: 'asc',
-      locale: {
-        emptyMessage: 'No data found'
-      }
-    };
-  },
-
-  getInitialState() {
-    return {
+class Table extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
       columnWidth: 0,
       mouseAreaLeft: -1,
       dataKey: 0,
@@ -59,27 +21,27 @@ const Table = React.createClass({
       scrollTop: 0,
       resizeColumnFixed: false
     };
-  },
+  }
 
   componentDidMount() {
     this._onBodyScrollListener = on(this.refs.tableBody, 'scroll', this.handleBodyScroll);
-  },
+  }
 
   componentDidUpdate(nextProps) {
     this.handleBodyScroll();
-  },
+  }
 
   componentWillUnmount() {
     if (this._onBodyScrollListener) {
       this._onBodyScrollListener.off();
     }
-  },
+  }
 
-  getFixedCellGroups() {
+  getFixedCellGroups = () => {
     return findDOMNode(this.refs.table).querySelectorAll(`.${this.props.classPrefix}-cell-group.fixed`);
-  },
+  }
 
-  getCells() {
+  getCells = () => {
 
     let left = 0;                  // Cell left margin
     let isFixedColumn = false;     // IF there are fixed columns
@@ -139,14 +101,14 @@ const Table = React.createClass({
       isFixedColumn,
       allColumnsWidth: left
     };
-  },
+  }
 
-  _onTreeToggle(rowKey, index) {
+  _onTreeToggle = (rowKey, index) => {
     console.log('treeToggle:' + rowKey);
     toggleClass(findDOMNode(this.refs[`children_${rowKey}_${index}`]), 'open');
-  },
+  }
 
-  randerRowData(bodyCells, rowData, props) {
+  randerRowData = (bodyCells, rowData, props) => {
     const { onRowClick, classPrefix } = this.props;
     const hasChildren = this.props.isTree && rowData.children && Array.isArray(rowData.children) && rowData.children.length > 0;
     const renderRowProps = {
@@ -207,13 +169,13 @@ const Table = React.createClass({
     }
 
     return row;
-  },
+  }
 
-  cloneCell(Cell, props) {
+  cloneCell = (Cell, props) => {
     return React.cloneElement(Cell, props, Cell.props.children);
-  },
+  }
 
-  handleBodyScroll() {
+  handleBodyScroll = () => {
 
     let {tableBody, tableHeader} = this.refs;
     let tableHeaderDom = findDOMNode(tableHeader);
@@ -235,29 +197,29 @@ const Table = React.createClass({
 
     let toggle = top > 1 ? 'addClass' : 'removeClass';
     !isIE8 && handelClass[toggle](tableHeaderDom, 'shadow');
-  },
+  }
 
-  _onColumnResizeEnd(columnWidth, cursorDelta, dataKey, index) {
+  _onColumnResizeEnd = (columnWidth, cursorDelta, dataKey, index) => {
     this.setState({
       isColumnResizing: false,
       mouseAreaLeft: -1,
       [`${dataKey}_${index}_width`]: columnWidth
     });
-  },
+  }
 
-  _onColumnResize(width, left, event) {
+  _onColumnResize = (width, left, event) => {
     this.setState({
       isColumnResizing: true
     });
-  },
+  }
 
-  _onColumnResizeMove(width, left, fixed) {
+  _onColumnResizeMove = (width, left, fixed) => {
 
     this.setState({
       resizeColumnFixed: fixed,
       mouseAreaLeft: width + left
     });
-  },
+  }
 
   render() {
     const {
@@ -355,6 +317,42 @@ const Table = React.createClass({
       </div>
     );
   }
-});
+}
 
+Table.propTypes = {
+  width: PropTypes.number,
+  data: PropTypes.array.isRequired,
+  height: PropTypes.number,
+  rowHeight: PropTypes.number,
+  headerHeight: PropTypes.number,
+  scrollLeft: PropTypes.number,
+  scrollTop: PropTypes.number,
+  onRowClick: PropTypes.func,
+  isTree: PropTypes.bool,
+  expand: PropTypes.bool,
+  locale: PropTypes.object,
+  sortColumn: PropTypes.string,
+  sortType: PropTypes.oneOf(['desc', 'asc']),
+  /**
+   * @callback
+   * @params: sortColumn dataKey
+   * @params: sortType
+   */
+  onSortColumn: PropTypes.func,
+  classPrefix: PropTypes.string,
+  children: PropTypes.any,
+  className: PropTypes.any,
+  style: PropTypes.any,
+  id: PropTypes.any
+};
+
+Table.defaultProps = {
+  classPrefix: 'ray-table',
+  height: 200,
+  rowHeight: 36,
+  sortType: 'asc',
+  locale: {
+    emptyMessage: 'No data found'
+  }
+};
 export default Table;

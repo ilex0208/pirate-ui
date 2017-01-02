@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react';
-import {Table, Column, Cell, HeaderCell} from '../src/otable';
+import {Table, Column, Cell, HeaderCell} from './../../src/otable';
 import StatesCell from './StatesCell';
 
 const datas = [
