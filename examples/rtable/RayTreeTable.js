@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import RayTable from './../../src/rtable';
-import './../../src/rtable/style/index.css';
+import RayTable from './../../lib/rtable';
+// import RayTable from 'amos-ui/lib/rtable';
+import './index.css';
 
 const permissionRender = (text) => <span><input type="checkbox" className="common-checkbox" />r/w</span>;
 
