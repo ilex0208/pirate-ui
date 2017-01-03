@@ -10,7 +10,7 @@ const execRowKey = '_' + (Math.random() * 1E18).toString(36).slice(0, 5).toUpper
 const isIE8 = ()=> !!navigator.userAgent.match(/MSIE 8.0/);
 const ReactChildren = React.Children;
 
-class Table extends Component {
+class RTable extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -319,7 +319,7 @@ class Table extends Component {
   }
 }
 
-Table.propTypes = {
+RTable.propTypes = {
   width: PropTypes.number,
   data: PropTypes.array.isRequired,
   height: PropTypes.number,
@@ -346,7 +346,7 @@ Table.propTypes = {
   id: PropTypes.any
 };
 
-Table.defaultProps = {
+RTable.defaultProps = {
   classPrefix: 'ray-table',
   height: 200,
   rowHeight: 36,
@@ -355,4 +355,4 @@ Table.defaultProps = {
     emptyMessage: 'No data found'
   }
 };
-export default Table;
+export default RTable;

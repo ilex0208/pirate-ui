@@ -1,6 +1,6 @@
-const _otable = require('./otable');
+const RTable = require('./otable');
 const RayTable = require('./rtable');
 module.exports = {
-  ..._otable,
+  RTable,
   RayTable
 };

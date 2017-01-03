@@ -10,7 +10,7 @@ const execRowKey = '_' + (Math.random() * 1E18).toString(36).slice(0, 5).toUpper
 const isIE8 = ()=> !!navigator.userAgent.match(/MSIE 8.0/);
 const ReactChildren = React.Children;
 
-const Table = React.createClass({
+const RTable = React.createClass({
   propTypes: {
     width: PropTypes.number,
     data: PropTypes.array.isRequired,
@@ -357,4 +357,4 @@ const Table = React.createClass({
   }
 });
 
-export default Table;
+export default RTable;

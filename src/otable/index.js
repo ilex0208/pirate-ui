@@ -1,13 +1,12 @@
-import Table from './Table';
+import RTable from './Table';
 import Column from './Column';
 import Cell from './Cell';
 import HeaderCell from './HeaderCell';
 import TablePagination from './TablePagination';
+import './style/style.css';
 
-export {
-  Table,
-  Column,
-  Cell,
-  HeaderCell,
-  TablePagination
-};
+RTable.Column = Column;
+RTable.Cell = Cell;
+RTable.HeaderCell = HeaderCell;
+RTable.TablePagination = TablePagination;
+export default RTable;
