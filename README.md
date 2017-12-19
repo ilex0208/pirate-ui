@@ -1,5 +1,6 @@
-## amos-ui
+## pirate-ui
 
 ##useage
 
-npm install --save amos-ui
+npm install --save pirate-ui
+
